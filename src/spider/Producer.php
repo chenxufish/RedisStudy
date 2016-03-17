@@ -29,7 +29,7 @@ class Producer extends Process
         $urls = file($this->log);
         Logger::info("producer start");
         foreach($urls as $url) {
-            $this->queue->put($url);
+            $this->queue->put(trim($url));
         }
         Logger::info("producer stop");
     }
