@@ -44,7 +44,6 @@ class Spider extends Process
                 $response = $this->http->get($url);
                 $this->cache->set($url, $response->getBody());
             }catch(\Exception $e) {
-                Logger::info($e->getMessage());
             }
 
             Logger::info('get body. size:' . strlen($response->getBody()));
