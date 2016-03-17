@@ -18,12 +18,14 @@ class Spider extends Process
 {
     protected $http;
     protected $queue;
+    protected $cache;
 
     public function __construct()
     {
         parent::__construct(null, null);
         $this->http = new Client();
         $this->queue = new RedisQueue('127.0.0.1', 6379, 2, 'spider-queue');
+        $this->cache = new Cache();
     }
 
     public function run() {
@@ -36,7 +38,11 @@ class Spider extends Process
             }
             try{
                 $url = $this->queue->get();
+                if($this->cache->get($url)) {
+                    Logger::info("cached. url:" . $url);
+                }
                 $response = $this->http->get($url);
+                $this->cache->set($url, $response->getBody());
             }catch(\Exception $e) {
                 Logger::info($e->getMessage());
             }
