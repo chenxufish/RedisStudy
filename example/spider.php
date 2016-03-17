@@ -8,6 +8,16 @@
 
 require dirname(__DIR__) . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
 
-$urls = file(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'resource' . DIRECTORY_SEPARATOR . 'refer.log');
-$spider = new \jenner\redis\study\spider\Spider($urls);
-$spider->start();
+$refer_file = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'resource' . DIRECTORY_SEPARATOR . 'refer.log';
+
+$producer = new \jenner\redis\study\spider\Producer($refer_file);
+$producer->start();
+$producer->wait();
+
+$pool = new \Jenner\SimpleFork\Pool();
+for($i = 0; $i<100; $i++) {
+    $spider = new \jenner\redis\study\spider\Spider();
+    $pool->execute($spider);
+}
+
+$pool->wait();

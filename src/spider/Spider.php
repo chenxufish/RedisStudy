@@ -9,37 +9,33 @@
 namespace jenner\redis\study\spider;
 
 
-use React\EventLoop\Factory;
+use GuzzleHttp\Client;
+use jenner\redis\study\tool\Logger;
+use Jenner\SimpleFork\Process;
+use Jenner\SimpleFork\Queue\RedisQueue;
 
-class Spider
+class Spider extends Process
 {
-    protected $urls;
+    protected $http;
+    protected $queue;
 
-    public function __construct(array $urls)
+    public function __construct()
     {
-        $this->urls = $urls;
+        parent::__construct(null, null);
+        $this->http = new Client();
+        $this->queue = new RedisQueue('127.0.0.1', 6379, 2, 'spider-queue');
     }
 
-    public function start() {
-        $loop = Factory::create();
-
-        $dnsResolverFactory = new \React\Dns\Resolver\Factory();
-        $dnsResolver = $dnsResolverFactory->createCached('8.8.8.8', $loop);
-
-        $factory = new \React\HttpClient\Factory();
-
-
-        foreach($this->urls as $url) {
-            $client = $factory->create($loop, $dnsResolver);
-            $request = $client->request('GET', $url);
-            $request->on('response', function ($response) {
-                $response->on('data', function ($data, $response) {
-                    echo '...' . PHP_EOL;
-                });
-            });
-            $request->end();
+    public function run() {
+        Logger::info("spider start");
+        while(true) {
+            if($this->queue->size() == 0) {
+                break;
+            }
+            $url = $this->queue->get();
+            $response = $this->http->get($url);
+            Logger::info('get body. size:' . strlen($response->getBody()));
         }
-
-        $loop->run();
+        Logger::info("spider stop");
     }
 }
