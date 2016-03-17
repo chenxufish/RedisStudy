@@ -33,7 +33,7 @@ class Spider
             $request = $client->request('GET', $url);
             $request->on('response', function ($response) {
                 $response->on('data', function ($data, $response) {
-                    var_dump($data, $response);
+                    echo '...' . PHP_EOL;
                 });
             });
             $request->end();
