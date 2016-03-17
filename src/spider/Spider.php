@@ -27,9 +27,10 @@ class Spider
         $dnsResolver = $dnsResolverFactory->createCached('8.8.8.8', $loop);
 
         $factory = new \React\HttpClient\Factory();
-        $client = $factory->create($loop, $dnsResolver);
+
 
         foreach($this->urls as $url) {
+            $client = $factory->create($loop, $dnsResolver);
             $request = $client->request('GET', $url);
             $request->on('response', function ($response) {
                 $response->on('data', function ($data, $response) {
