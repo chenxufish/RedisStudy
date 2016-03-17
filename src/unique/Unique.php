@@ -9,6 +9,8 @@
 namespace jenner\redis\study\unique;
 
 
+use jenner\redis\study\tool\Logger;
+
 class Unique
 {
     protected $redis;
@@ -26,11 +28,13 @@ class Unique
     }
 
     public function start() {
+        Logger::info("unique process start");
         foreach($this->ips as $ip) {
             $this->redis->pfadd(self::KEY, $ip);
         }
 
         echo $this->redis->pfcount();
+        Logger::info("unique done. ip count:" . $this->redis->pfcount());
     }
 
 

@@ -30,6 +30,7 @@ class Spider extends Process
         Logger::info("spider start");
         while(true) {
             if($this->queue->size() == 0) {
+                Logger::info("queue is empty");
                 break;
             }
             $url = $this->queue->get();
