@@ -29,6 +29,7 @@ class Spider extends Process
     public function run() {
         Logger::info("spider start");
         while(true) {
+            Logger::info($this->queue->size());
             if($this->queue->size() == 0) {
                 Logger::info("queue is empty");
                 break;
