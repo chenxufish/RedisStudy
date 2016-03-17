@@ -34,8 +34,13 @@ class Spider extends Process
                 Logger::info("queue is empty");
                 break;
             }
-            $url = $this->queue->get();
-            $response = $this->http->get($url);
+            try{
+                $url = $this->queue->get();
+                $response = $this->http->get($url);
+            }catch(\Exception $e) {
+                Logger::info($e->getMessage());
+            }
+
             Logger::info('get body. size:' . strlen($response->getBody()));
         }
         Logger::info("spider stop");
