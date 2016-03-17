@@ -1,0 +1,23 @@
+{
+  "name": "jenner/redis-study",
+  "description": "redis-study",
+  "version": "0.1.0",
+  "authors": [
+    {
+      "name": "Jenner",
+      "email": "hypxm@qq.com",
+      "homepage": "http://www.huyanping.cn"
+    }
+  ],
+  "license": "MIT",
+  "type": "package",
+  "require": {
+    "php": ">=5.3.0",
+    "jenner/simple_fork": "1.1.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "jenner\\redis\\study\\": "./src"
+    }
+  }
+}
