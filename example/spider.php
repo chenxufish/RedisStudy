@@ -6,6 +6,7 @@
  * Time: 21:02
  */
 
+declare(ticks = 1);
 require dirname(__DIR__) . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
 
 $refer_file = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'resource' . DIRECTORY_SEPARATOR . 'refer.log';
