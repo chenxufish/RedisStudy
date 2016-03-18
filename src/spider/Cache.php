@@ -23,12 +23,14 @@ class Cache
         $this->redis->setOption(\Redis::OPT_PREFIX, self::PREFIX);
     }
 
-    public function get($url) {
+    public function get($url)
+    {
         $key = md5($url);
         return $this->redis->get($key);
     }
 
-    public function set($url, $value) {
+    public function set($url, $value)
+    {
         $key = md5($url);
         return $this->redis->set($key, $value);
     }

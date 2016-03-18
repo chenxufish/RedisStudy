@@ -16,7 +16,7 @@ $producer->start();
 $producer->wait();
 
 $pool = new \Jenner\SimpleFork\Pool();
-for($i = 0; $i<100; $i++) {
+for ($i = 0; $i < 100; $i++) {
     $spider = new \jenner\redis\study\spider\Spider();
     $pool->execute($spider);
 }

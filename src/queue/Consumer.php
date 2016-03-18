@@ -21,7 +21,7 @@ class Consumer extends Process
             $res = $queue->get();
             if ($res !== false) {
                 echo $res . PHP_EOL;
-            }else{
+            } else {
                 break;
             }
         }

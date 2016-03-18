@@ -27,9 +27,10 @@ class Unique
         $this->ips = $ips;
     }
 
-    public function start() {
+    public function start()
+    {
         Logger::info("unique process start");
-        foreach($this->ips as $ip) {
+        foreach ($this->ips as $ip) {
             $this->redis->pfadd(self::KEY, $ip);
         }
 

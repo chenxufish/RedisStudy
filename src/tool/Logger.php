@@ -11,7 +11,8 @@ namespace jenner\redis\study\tool;
 
 class Logger
 {
-    public static function info($message) {
+    public static function info($message)
+    {
         echo "[" . getmypid() . "]" . $message . PHP_EOL;
     }
 }

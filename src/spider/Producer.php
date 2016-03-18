@@ -25,10 +25,11 @@ class Producer extends Process
         $this->queue = new RedisQueue('127.0.0.1', 6379, 2, 'spider-queue');
     }
 
-    public function run() {
+    public function run()
+    {
         $urls = file($this->log);
         Logger::info("producer start");
-        foreach($urls as $url) {
+        foreach ($urls as $url) {
             $this->queue->put(trim($url));
         }
         Logger::info("producer stop");

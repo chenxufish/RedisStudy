@@ -28,23 +28,25 @@ class Spider extends Process
         $this->cache = new Cache();
     }
 
-    public function run() {
+    public function run()
+    {
         Logger::info("spider start");
-        while(true) {
+        while (true) {
             Logger::info($this->queue->size());
-            if($this->queue->size() == 0) {
+            if ($this->queue->size() == 0) {
                 Logger::info("queue is empty");
                 break;
             }
-            try{
+            try {
                 $url = $this->queue->get();
-                if($this->cache->get($url)) {
+                if ($this->cache->get($url)) {
                     Logger::info("cached. url:" . $url);
                 }
                 $response = $this->http->get($url);
                 $this->cache->set($url, $response->getBody());
                 Logger::info('get body. size:' . strlen($response->getBody()));
-            }catch(\Exception $e) {}
+            } catch (\Exception $e) {
+            }
         }
         Logger::info("spider stop");
     }

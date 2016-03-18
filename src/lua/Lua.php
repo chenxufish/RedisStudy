@@ -22,11 +22,13 @@ class Lua
         $this->redis->select(2);
     }
 
-    public function set($key, $value) {
+    public function set($key, $value)
+    {
         return $this->redis->set($key, $value);
     }
 
-    public function getAndSet($key, $value) {
+    public function getAndSet($key, $value)
+    {
         $lua = <<<GLOB_MARK
 local value = redis.call('get', KEYS[1])
 redis.call('set', KEYS[1], ARGV[1])
@@ -36,7 +38,8 @@ GLOB_MARK;
         Logger::info("eval script result:" . var_export($result, true));
     }
 
-    public function error() {
+    public function error()
+    {
         return $this->redis->getLastError();
     }
 }
