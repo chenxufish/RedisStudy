@@ -9,6 +9,8 @@
 namespace jenner\redis\study\score;
 
 
+use jenner\redis\study\tool\Logger;
+
 class Generator
 {
     protected $target;
@@ -30,8 +32,11 @@ class Generator
                 $user_name = md5(mt_rand(0, 100000));
                 $payment = mt_rand(0, 10000);
                 $line = $start_date . "\t" . $user_name . "\t" . $payment . PHP_EOL;
-                file_put_contents($line);
+                file_put_contents($this->target, $line, FILE_APPEND);
             }
+
+            $start_date = date("Y-m-d H:i:s", strtotime($start_date . ' +1 Day'));
+            Logger::info($start_date);
         }
     }
 }
