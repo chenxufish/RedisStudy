@@ -28,8 +28,8 @@ class Lua
 
     public function getAndSet($key, $value) {
         $lua = <<<GLOB_MARK
-local value = redis.call('get', KEY[1])
-redis.call('set', ARGV[1])
+local value = redis.call('get')
+redis.call('set', KEYS[1], ARGV[1])
 return value
 GLOB_MARK;
         $result = $this->redis->eval($lua, array($key, $value), 1);
