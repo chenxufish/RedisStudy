@@ -35,4 +35,8 @@ GLOB_MARK;
         $result = $this->redis->eval($lua, array($key, $value), 1);
         Logger::info("eval script result:" . var_export($result, true));
     }
+
+    public function error() {
+        return $this->redis->getLastError();
+    }
 }

@@ -12,3 +12,4 @@ $lua = new \jenner\redis\study\lua\Lua();
 
 $lua->set("hello", "37wan");
 $lua->getAndSet("hello", "37");
+echo $lua->error() . PHP_EOL;
