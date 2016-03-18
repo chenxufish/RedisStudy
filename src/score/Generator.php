@@ -17,19 +17,20 @@ class Generator
 
     public function __construct($target)
     {
-        if(!file_exists($target)) {
+        if (!file_exists($target)) {
             unlink($target);
         }
         $this->target = $target;
     }
 
-    public function generate() {
+    public function generate()
+    {
         $start_date = "2016-03-01 00:00:00";
         $end_date = "2016-03-18 00:00:00";
-        while(strtotime($start_date) <= strtotime($end_date)) {
+        while (strtotime($start_date) <= strtotime($end_date)) {
             Logger::info($start_date);
             $count = 1000;
-            for($i=0; $i<$count; $i++) {
+            for ($i = 0; $i < $count; $i++) {
                 $user_name = md5(mt_rand(0, 100000));
                 $payment = mt_rand(0, 10000);
                 $line = $start_date . "\t" . $user_name . "\t" . $payment . PHP_EOL;
