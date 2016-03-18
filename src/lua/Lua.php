@@ -6,7 +6,7 @@
  * Time: 10:27
  */
 
-namespace jenner\redis\study\Lua;
+namespace jenner\redis\study\lua;
 
 
 use jenner\redis\study\tool\Logger;
