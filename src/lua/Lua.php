@@ -22,6 +22,10 @@ class Lua
         $this->redis->select(2);
     }
 
+    public function set($key, $value) {
+        return $this->redis->set($key, $value);
+    }
+
     public function getAndSet($key, $value) {
         $lua = <<<GLOB_MARK
 local value = redis.call('get', KEY[1])
