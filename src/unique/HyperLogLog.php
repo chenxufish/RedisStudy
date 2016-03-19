@@ -29,9 +29,7 @@ class HyperLogLog
     public function start()
     {
         Logger::info("unique process start");
-        foreach ($this->ips as $ip) {
-            $this->redis->pfadd(self::KEY, $ip);
-        }
+        $this->redis->pfadd(self::KEY, $this->ips);
 
         Logger::info("unique done. ip count:" . $this->redis->pfcount());
     }
