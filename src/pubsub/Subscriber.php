@@ -13,9 +13,8 @@ use jenner\redis\study\tool\Logger;
 
 class Subscriber
 {
-    protected $redis;
-
     const KEY = "pubsub-demo";
+    protected $redis;
 
     public function __construct()
     {
@@ -24,9 +23,10 @@ class Subscriber
         $this->redis->select(4);
     }
 
-    public function subscribe() {
-            $this->redis->subscribe(self::KEY, function($redis, $channel, $message) {
-                Logger::info("get message[" . $message ."] from channel[" . $channel . "]");
-            });
+    public function subscribe()
+    {
+        $this->redis->subscribe(array(self::KEY), function ($redis, $channel, $message) {
+            Logger::info("get message[" . $message . "] from channel[" . $channel . "]");
+        });
     }
 }

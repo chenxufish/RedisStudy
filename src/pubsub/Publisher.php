@@ -22,9 +22,10 @@ class Publisher
         $this->redis->select(4);
     }
 
-    public function publish() {
+    public function publish()
+    {
         $count = 10;
-        for($i = 0; $i<$count; $i++) {
+        for ($i = 0; $i < $count; $i++) {
             $this->redis->publish(self::KEY, mt_rand(0, 10000));
         }
     }
