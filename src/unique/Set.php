@@ -11,7 +11,7 @@ namespace jenner\redis\study\unique;
 
 use jenner\redis\study\tool\Logger;
 
-class Normal
+class Set
 {
     protected $redis;
     protected $ips;
@@ -22,7 +22,6 @@ class Normal
         $this->redis = new \Redis();
         $this->redis->connect("127.0.0.1", 6379);
         $this->redis->select(3);
-
 
         $this->ips = $ips;
     }
