@@ -10,7 +10,7 @@ require dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_S
 
 $file = dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'resource' . DIRECTORY_SEPARATOR . 'ip.log';
 $ips = file($file);
-array_walk($ips, function($key, &$value) {
+array_walk($ips, function(&$value) {
     $value = trim($value);
 });
 var_dump($ips);
