@@ -8,8 +8,9 @@
 
 require dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
 
-echo dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'resouce' . DIRECTORY_SEPARATOR . 'ip.log' . PHP_EOL;
-$ips = file(dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'resouce' . DIRECTORY_SEPARATOR . 'ip.log');
+$file = dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'resouce' . DIRECTORY_SEPARATOR . 'ip.log' . PHP_EOL;
+$ips = file($file);
+var_dump($ips);
 $hyper = new \jenner\redis\study\unique\HyperLogLog($ips);
 $hyper->start();
 
