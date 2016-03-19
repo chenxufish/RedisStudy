@@ -13,9 +13,10 @@ $ips = file($file);
 array_walk($ips, function($key, &$value) {
     $value = trim($value);
 });
+var_dump($ips);
+
 $hyper = new \jenner\redis\study\unique\HyperLogLog($ips);
 $hyper->start();
 
-exit;
 $set = new \jenner\redis\study\unique\Set($ips);
 $set->start();
