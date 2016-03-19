@@ -6,17 +6,18 @@
  * Time: 9:40
  */
 
-require dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
+require dirname(__DIR__) . DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR . 'autoload.php';
 
-$file = dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'resource' . DIRECTORY_SEPARATOR . 'ip.log';
+$file = dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR . 'ip.log';
 $ips = file($file);
 array_walk($ips, function(&$value) {
     $value = trim($value);
 });
-var_dump($ips);
 
+\jenner\redis\study\tool\Logger::info("hyperloglog start");
 $hyper = new \jenner\redis\study\unique\HyperLogLog($ips);
 $hyper->start();
 
+\jenner\redis\study\tool\Logger::info("set start");
 $set = new \jenner\redis\study\unique\Set($ips);
 $set->start();
