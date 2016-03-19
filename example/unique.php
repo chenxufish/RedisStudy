@@ -8,7 +8,7 @@
 
 require dirname(__DIR__) . DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR . 'autoload.php';
 
-$file = dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR . 'ip.log';
+$file = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'resource' . DIRECTORY_SEPARATOR . 'ip.log';
 $ips = file($file);
 array_walk($ips, function(&$value) {
     $value = trim($value);
