@@ -30,7 +30,7 @@ class HyperLogLog
     {
         Logger::info("unique process start");
         $this->redis->pfadd(self::KEY, $this->ips);
-        echo $this->redis->getLastError() . PHP_EOL;
+
         Logger::info("unique done. ip count:" . $this->redis->pfcount(self::KEY));
 
     }
