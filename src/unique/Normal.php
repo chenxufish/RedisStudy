@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: Jenner
- * Date: 2016/3/17
- * Time: 21:08
+ * Date: 2016/3/19
+ * Time: 9:32
  */
 
 namespace jenner\redis\study\unique;
@@ -11,11 +11,11 @@ namespace jenner\redis\study\unique;
 
 use jenner\redis\study\tool\Logger;
 
-class Unique
+class Normal
 {
     protected $redis;
     protected $ips;
-    const KEY = "ip-unique-hyperloglog";
+    const KEY = "ip-unique-normal";
 
     public function __construct(array $ips)
     {
@@ -31,11 +31,9 @@ class Unique
     {
         Logger::info("unique process start");
         foreach ($this->ips as $ip) {
-            $this->redis->pfadd(self::KEY, $ip);
+            $this->redis->sAdd(self::KEY, $ip);
         }
 
-        Logger::info("unique done. ip count:" . $this->redis->pfcount());
+        Logger::info("unique done. ip count:" . $this->redis->sCard(self::KEY));
     }
-
-
 }
