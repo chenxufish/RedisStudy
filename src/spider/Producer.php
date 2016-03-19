@@ -15,9 +15,19 @@ use Jenner\SimpleFork\Queue\RedisQueue;
 
 class Producer extends Process
 {
+    /**
+     * @var RedisQueue
+     */
     protected $queue;
+    /**
+     * @var null|string
+     */
     protected $log;
 
+    /**
+     * Producer constructor.
+     * @param null|string $log
+     */
     public function __construct($log)
     {
         parent::__construct(null, null);
@@ -25,6 +35,9 @@ class Producer extends Process
         $this->queue = new RedisQueue('127.0.0.1', 6379, 2, 'spider-queue');
     }
 
+    /**
+     *
+     */
     public function run()
     {
         $urls = file($this->log);

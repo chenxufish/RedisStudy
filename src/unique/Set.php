@@ -13,10 +13,23 @@ use jenner\redis\study\tool\Logger;
 
 class Set
 {
+    /**
+     * @var \Redis
+     */
     protected $redis;
+    /**
+     * @var array
+     */
     protected $ips;
+    /**
+     *
+     */
     const KEY = "ip-unique-normal";
 
+    /**
+     * Set constructor.
+     * @param array $ips
+     */
     public function __construct(array $ips)
     {
         $this->redis = new \Redis();
@@ -26,6 +39,9 @@ class Set
         $this->ips = $ips;
     }
 
+    /**
+     * start to count ips using set
+     */
     public function start()
     {
         Logger::info("unique process start");

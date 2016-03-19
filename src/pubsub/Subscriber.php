@@ -13,9 +13,18 @@ use jenner\redis\study\tool\Logger;
 
 class Subscriber
 {
+    /**
+     * default pubsub key
+     */
     const KEY = "pubsub-demo";
+    /**
+     * @var \Redis
+     */
     protected $redis;
 
+    /**
+     * Subscriber constructor.
+     */
     public function __construct()
     {
         $this->redis = new \Redis();

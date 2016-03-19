@@ -11,10 +11,19 @@ namespace jenner\redis\study\pubsub;
 
 class Publisher
 {
+    /**
+     * @var \Redis
+     */
     protected $redis;
 
+    /**
+     * default pubsub key
+     */
     const KEY = "pubsub-demo";
 
+    /**
+     * Publisher constructor.
+     */
     public function __construct()
     {
         $this->redis = new \Redis();

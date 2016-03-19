@@ -13,8 +13,14 @@ use jenner\redis\study\tool\Logger;
 
 class Lua
 {
+    /**
+     * @var \Redis
+     */
     protected $redis;
 
+    /**
+     * Lua constructor.
+     */
     public function __construct()
     {
         $this->redis = new \Redis();
@@ -22,11 +28,20 @@ class Lua
         $this->redis->select(2);
     }
 
+    /**
+     * @param $key
+     * @param $value
+     * @return bool
+     */
     public function set($key, $value)
     {
         return $this->redis->set($key, $value);
     }
 
+    /**
+     * @param $key
+     * @param $value
+     */
     public function getAndSet($key, $value)
     {
         $lua = <<<GLOB_MARK
@@ -38,6 +53,9 @@ GLOB_MARK;
         Logger::info("eval script result:" . var_export($result, true));
     }
 
+    /**
+     * @return string
+     */
     public function error()
     {
         return $this->redis->getLastError();

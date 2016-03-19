@@ -13,10 +13,23 @@ use jenner\redis\study\tool\Logger;
 
 class HyperLogLog
 {
+    /**
+     * @var \Redis
+     */
     protected $redis;
+    /**
+     * @var array
+     */
     protected $ips;
+    /**
+     * default hyperloglog key
+     */
     const KEY = "ip-unique-hyperloglog";
 
+    /**
+     * HyperLogLog constructor.
+     * @param array $ips
+     */
     public function __construct(array $ips)
     {
         $this->redis = new \Redis();
@@ -26,6 +39,9 @@ class HyperLogLog
         $this->ips = $ips;
     }
 
+    /**
+     * start to count ips using hyperloglog
+     */
     public function start()
     {
         Logger::info("unique process start");

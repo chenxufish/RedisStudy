@@ -13,8 +13,15 @@ use jenner\redis\study\tool\Logger;
 
 class Generator
 {
+    /**
+     * @var string target dir
+     */
     protected $target;
 
+    /**
+     * Generator constructor.
+     * @param $target
+     */
     public function __construct($target)
     {
         if (!file_exists($target)) {
@@ -23,6 +30,9 @@ class Generator
         $this->target = $target;
     }
 
+    /**
+     * generator payment log file
+     */
     public function generate()
     {
         $start_date = "2016-03-01 00:00:00";

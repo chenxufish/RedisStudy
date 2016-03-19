@@ -16,10 +16,22 @@ use Jenner\SimpleFork\Queue\RedisQueue;
 
 class Spider extends Process
 {
+    /**
+     * @var Client
+     */
     protected $http;
+    /**
+     * @var RedisQueue
+     */
     protected $queue;
+    /**
+     * @var Cache
+     */
     protected $cache;
 
+    /**
+     * Spider constructor.
+     */
     public function __construct()
     {
         parent::__construct(null, null);
@@ -28,6 +40,9 @@ class Spider extends Process
         $this->cache = new Cache();
     }
 
+    /**
+     * start spider process
+     */
     public function run()
     {
         Logger::info("spider start");

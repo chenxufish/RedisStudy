@@ -14,6 +14,9 @@ use Jenner\SimpleFork\Queue\RedisQueue;
 
 class Consumer extends Process
 {
+    /**
+     * start consumer process
+     */
     public function run()
     {
         $queue = new RedisQueue('127.0.0.1', 6379, 1);
